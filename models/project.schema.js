@@ -11,6 +11,11 @@ const schema = new mongoose.Schema({
         unique: true,
         required: true
     },
+    developerId: {
+        type: String,
+        unique: true,
+        required: true
+    },
     description: {
         type: String,
     },

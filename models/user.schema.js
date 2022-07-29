@@ -22,7 +22,7 @@ const schema = new mongoose({
         type: String,
         enum: ['Online', 'Offline']
     },
-    lastSeen: String,
+    lastSeen: Date,
     createdAt: Date
 })
 
