@@ -15,6 +15,9 @@ const schema = new mongoose.Schema({
     name: String,
     description: String,
     isGroup: Boolean,
+    groupConfig: {
+
+    },
     admins: [
         {
             userId: {
