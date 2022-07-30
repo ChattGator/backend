@@ -1,25 +1,24 @@
-import mongoose from 'mongoose'
-
+import mongoose from 'mongoose';
 
 const schema = new mongoose.Schema({
-    id: {
-        type: String,
-        unique: true,
-        required: true
+  name: String,
+  avatar: String,
+  email: String,
+  google: {
+    googleId: String,
+  },
+  projects: [
+    {
+      projectId: {
+        type: String
+      },
     },
-    name: String,
-    projects: [
-        {
-            projectId: {
-                type: String,
-                unique: true,
-                required: true
-            }
-        }
-    ],
-    createdAt: Date
-
-})
+  ],
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
 
 const developer = new mongoose.model('developer', schema);
 export default developer;
