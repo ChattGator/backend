@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const schema = new mongoose({
+const schema = new mongoose.Schema({
     id: {
         type: String,
         unique: true,
