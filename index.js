@@ -4,6 +4,7 @@ import cors from "cors";
 import "dotenv/config";
 import bodyParser from "body-parser";
 import session from "express-session";
+import developerRouter from "./routes/developer"
 
 const app = express();
 const PORT = process.env.port || 5000;
@@ -40,6 +41,9 @@ app.get("/", (req, res) => {
   // mock server
   res.status(200).json({ message: "welcome to express servr" });
 });
+
+// router middleware
+app.use("/api/v1", developerRouter);
 
 app.use((req, res) => {
   // 404 Not found
