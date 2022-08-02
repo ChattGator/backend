@@ -3,9 +3,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import "dotenv/config";
 import bodyParser from "body-parser";
-import passport from "./passport/";
 import session from "express-session";
-import auth from "./routes/auth";
 
 const app = express();
 const PORT = process.env.port || 5000;
@@ -31,12 +29,6 @@ app.use(
     saveUninitialized: false,
   })
 );
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-// router middleware
-app.use("/api/v1/auth", auth);
 
 mongoose.connect(process.env.DATABASE_URL, {
   // connect to Mongo
