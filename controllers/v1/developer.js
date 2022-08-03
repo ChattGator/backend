@@ -1,4 +1,4 @@
-import Developer from "../models/developer.schema";
+import Developer from "../../models/developer.schema";
 
 export const createDeveloper = async (req, res) => {
   try {
