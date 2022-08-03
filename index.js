@@ -3,11 +3,10 @@ import mongoose from "mongoose";
 import cors from "cors";
 import "dotenv/config";
 import bodyParser from "body-parser";
-import v1 from './routes/v1/index'
+import v1 from "./routes/v1/index";
 
 const app = express();
 const PORT = process.env.port || 5000;
-
 
 const allowlist = [];
 const corsOptionsDelegate = function (req, callback) {
@@ -24,7 +23,7 @@ app.use(cors());
 app.use(bodyParser.json()); // Parse request body
 
 // router middleware
-app.use("/api/v1", v1)
+app.use("/api/v1", v1);
 
 mongoose.connect(process.env.DATABASE_URL, {
   // connect to Mongo

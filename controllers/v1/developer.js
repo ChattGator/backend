@@ -32,7 +32,6 @@ export const createDeveloper = async (req, res) => {
       message: "User created successfully",
       user: developer,
     });
-    
   } catch (err) {
     return res
       .status(400)
