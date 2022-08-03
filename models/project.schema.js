@@ -1,10 +1,12 @@
 import mongoose from "mongoose";
+import { nanoid } from "nanoid";
 
 const schema = new mongoose.Schema({
     id: {
         type: String,
         unique: true,
-        required: true
+        required: true,
+        default: nanoid(10)
     },
     name: {
         type: String,
@@ -23,7 +25,8 @@ const schema = new mongoose.Schema({
         secret: {
             type: String,
             unique: true,
-            required: true
+            required: true,
+            default: nanoid(12)
         }
     },
     projectConfig: {
@@ -36,7 +39,10 @@ const schema = new mongoose.Schema({
             default: 100
         }
     },
-    createdAt: Date
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
 
 })
 
