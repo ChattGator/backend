@@ -7,11 +7,16 @@ const createProjectSchema = Joi.object({
 
 })
 
-const projectUpdateSchema = Joi.object({
+const updateProjectSchema = Joi.object({
+
     name: Joi.string().alphanum().min(3).max(20),
-    description: Joi.string().alphanum().max(200)
+    description: Joi.string().alphanum().max(200),
+    projectConfig: {
+        isGroupEnabled: Joi.boolean(),
+        chatLimit: Joi.number().max(500)
+    }
 
 })
 
 
-export { createProjectSchema }
+export { createProjectSchema, updateProjectSchema }
