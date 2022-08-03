@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 import cors from "cors";
 import "dotenv/config";
 import bodyParser from "body-parser";
-import session from "express-session";
 import developerRouter from "./routes/developer"
 
 const app = express();
@@ -23,14 +22,6 @@ const corsOptionsDelegate = function (req, callback) {
 app.use(cors());
 app.use(bodyParser.json()); // Parse request body
 
-app.use(
-  session({
-    secret: process.env.APP_SECRET || "this is the default passphrase",
-    resave: false,
-    saveUninitialized: false,
-  })
-);
-
 mongoose.connect(process.env.DATABASE_URL, {
   // connect to Mongo
   useNewUrlParser: true,
@@ -43,7 +34,7 @@ app.get("/", (req, res) => {
 });
 
 // router middleware
-app.use("/api/v1", developerRouter);
+app.use("/api/v1/developer", developerRouter);
 
 app.use((req, res) => {
   // 404 Not found
