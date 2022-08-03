@@ -6,11 +6,13 @@ import bodyParser from "body-parser";
 import passport from "./passport/";
 import session from "express-session";
 import auth from "./routes/auth";
+import v1 from './routes/v1/index'
 
 const app = express();
 const PORT = process.env.port || 5000;
 
-const allowlist = ["http://localhost:3000"];
+
+const allowlist = [];
 const corsOptionsDelegate = function (req, callback) {
   let corsOptions;
   if (allowlist.indexOf(req.header("Origin")) !== -1) {
@@ -37,6 +39,7 @@ app.use(passport.session());
 
 // router middleware
 app.use("/api/v1/auth", auth);
+app.use("/api/v1", v1)
 
 mongoose.connect(process.env.DATABASE_URL, {
   // connect to Mongo

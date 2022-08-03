@@ -10,14 +10,14 @@ const strategy = new GoogleStrategy(
     callbackURL: "/api/v1/auth/google/callback",
   },
   function (token, tokenSecret, profile, done) {
-    
+
     const { id, displayName, photos, emails } = profile;
 
     // console.log(id, displayName, photos, emails);
 
     Developer.findOne({ "google.googleId": id }, (err, developerMatch) => {
       if (err) {
-        console.log("error in finding",err)
+        console.log("error in finding", err)
         return done(null, false);
       }
 
@@ -37,7 +37,7 @@ const strategy = new GoogleStrategy(
 
       developer.save((err, savedDeveloper) => {
         if (err) {
-          console.log("error in saving",err)
+          console.log("error in saving", err)
           return done(null, false);
         } else {
           return done(null, savedDeveloper);
