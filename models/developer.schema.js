@@ -2,11 +2,8 @@ import mongoose from 'mongoose';
 
 const schema = new mongoose.Schema({
   name: String,
-  avatar: String,
+  picture: String,
   email: String,
-  google: {
-    googleId: String,
-  },
   projects: [
     {
       projectId: {

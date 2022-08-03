@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --experimental-modules --es-module-specifier-resolution=node index.js",
-    "start": "node index.js"
+    "start": "node --experimental-modules --es-module-specifier-resolution=node index.js"
   },
   "repository": {
     "type": "git",
@@ -27,12 +27,10 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
-    "express-session": "^1.17.3",
+    "firebase-admin": "^11.0.1",
     "joi": "^17.6.0",
     "mongoose": "^6.5.0",
-    "nanoid": "^4.0.0",
-    "passport": "^0.6.0",
-    "passport-google-oauth20": "^2.0.0"
+    "nanoid": "^4.0.0"
   },
   "type": "module",
   "devDependencies": {

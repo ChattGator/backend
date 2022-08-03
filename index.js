@@ -3,14 +3,10 @@ import mongoose from "mongoose";
 import cors from "cors";
 import "dotenv/config";
 import bodyParser from "body-parser";
-import passport from "./passport/";
-import session from "express-session";
-import auth from "./routes/auth";
-import v1 from './routes/v1/index'
+import v1 from "./routes/v1/index";
 
 const app = express();
 const PORT = process.env.port || 5000;
-
 
 const allowlist = [];
 const corsOptionsDelegate = function (req, callback) {
@@ -26,20 +22,8 @@ const corsOptionsDelegate = function (req, callback) {
 app.use(cors());
 app.use(bodyParser.json()); // Parse request body
 
-app.use(
-  session({
-    secret: process.env.APP_SECRET || "this is the default passphrase",
-    resave: false,
-    saveUninitialized: false,
-  })
-);
-
-app.use(passport.initialize());
-app.use(passport.session());
-
 // router middleware
-app.use("/api/v1/auth", auth);
-app.use("/api/v1", v1)
+app.use("/api/v1", v1);
 
 mongoose.connect(process.env.DATABASE_URL, {
   // connect to Mongo
