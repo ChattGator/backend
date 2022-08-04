@@ -9,14 +9,13 @@ const createProject = async (req, res) => {
     res
       .status(201)
       .json({
-        status: "success",
-        code: "201",
+        success: true,
         message: "project created successfully",
       });
   } catch (error) {
     res
       .status(500)
-      .json({ status: "error", code: "500", message: error.message });
+      .json({ success: false, message: error.message });
   }
 };
 
@@ -30,25 +29,21 @@ const fetchAllProjects = async (req, res) => {
       return res
         .status(200)
         .json({
-          status: "success",
-          code: "200",
+          success: true,
           data: results,
-          status: "success",
           message: "Project fetched successfully",
         });
     }
     res
       .status(404)
       .json({
-        status: "error",
-        code: "404",
-        data: [],
+        success: false,
         message: "No result found",
       });
   } catch (error) {
     res
       .status(500)
-      .json({ status: "error", code: "500", message: error.message });
+      .json({ success: false, message: error.message });
   }
 };
 
@@ -62,8 +57,7 @@ const fetchProjectById = async (req, res) => {
       return res
         .status(200)
         .json({
-          status: "success",
-          code: "200",
+          success: true,
           data: result,
           message: "project fetched successfully",
         });
@@ -71,15 +65,13 @@ const fetchProjectById = async (req, res) => {
     res
       .status(404)
       .json({
-        status: "error",
-        code: "404",
-        data: {},
+        success: false,
         message: "project not found",
       });
   } catch (error) {
     res
       .status(500)
-      .json({ status: "error", code: "500", message: error.message });
+      .json({ success: false, message: error.message });
   }
 };
 
@@ -100,18 +92,17 @@ const updateProject = async (req, res) => {
       return res
         .status(200)
         .json({
-          status: "success",
-          code: "200",
+          success: true,
           message: "Updated successfully",
         });
     }
     res
       .status(404)
-      .json({ status: "error", code: "404", message: "project not found" });
+      .json({ success: false, message: "project not found" });
   } catch (error) {
     res
       .status(500)
-      .json({ status: "error", code: "500", message: error.message });
+      .json({ success: false, message: error.message });
   }
 };
 
@@ -125,19 +116,18 @@ const deleteProject = async (req, res) => {
       return res
         .status(200)
         .json({
-          status: "success",
-          code: "200",
+          success: true,
           message: "project deleted successfully",
         });
     }
     res
       .status(404)
-      .json({ status: "error", code: "404", message: "project not found" });
+      .json({ success: false, message: "project not found" });
   } catch (error) {
     console.log(error);
     res
       .status(400)
-      .json({ status: "error", code: "400", message: error.message });
+      .json({ success: false, message: error.message });
   }
 };
 

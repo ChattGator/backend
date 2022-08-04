@@ -4,6 +4,7 @@ import cors from "cors";
 import "dotenv/config";
 import bodyParser from "body-parser";
 import v1 from "./routes/v1/index";
+import { isAuthorized } from "./middlewares/auth";
 
 const app = express();
 const PORT = process.env.port || 5000;
@@ -23,7 +24,7 @@ app.use(cors());
 app.use(bodyParser.json()); // Parse request body
 
 // router middleware
-app.use("/api/v1", v1);
+app.use("/api/v1", isAuthorized, v1);
 
 mongoose.connect(process.env.DATABASE_URL, {
   // connect to Mongo

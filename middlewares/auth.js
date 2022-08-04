@@ -2,6 +2,7 @@ import admin from "../firebase/config";
 
 export const isAuthorized = async (req, res, next) => {
   try {
+    console.log(req.headers.authorization);
     const token = req.headers.authorization?.replace("Bearer ", "");
 
     const decodedToken = await admin.auth().verifyIdToken(token);
