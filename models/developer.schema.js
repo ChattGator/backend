@@ -17,5 +17,5 @@ const schema = new mongoose.Schema({
   },
 });
 
-const developer = new mongoose.model('developer', schema);
+const developer = mongoose.model('developer', schema);
 export default developer;

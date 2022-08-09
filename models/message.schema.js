@@ -19,5 +19,5 @@ const schema = new mongoose.Schema({
     createdAt: Date
 })
 
-const message = new mongoose.model('message', schema);
+const message = mongoose.model('message', schema);
 export default message;
