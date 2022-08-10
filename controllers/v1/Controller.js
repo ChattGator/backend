@@ -6,6 +6,7 @@ class Controller {
     autoBind(this);
   }
 
+  
   async getAll(req, res) {
     console.log("here");
     try {

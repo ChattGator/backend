@@ -10,6 +10,24 @@ class ProjectController extends Controller {
     super(service);
     autoBind(this);
   }
+
+  async insert(req, res) {
+    const { _id } = req.user;
+    const data = req.body;
+    console.log(data);
+    try {
+      const response = await this.service.insert({
+        ...data,
+        developerId: _id,
+      });
+
+      return res.status(response.statusCode).json(response);
+    } catch (e) {
+      return res
+        .status(e.statusCode || 500)
+        .json({ error: true, message: e.message || "Something went wrong" });
+    }
+  }
 }
 
 export default new ProjectController(projectService);

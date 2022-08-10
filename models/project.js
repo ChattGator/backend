@@ -18,7 +18,6 @@ const schema = new mongoose.Schema({
   credentials: {
     secret: {
       type: String,
-      unique: true,
       required: true,
       default: nanoid(12),
     },
