@@ -28,6 +28,25 @@ class ProjectController extends Controller {
         .json({ error: true, message: e.message || "Something went wrong" });
     }
   }
+
+  async getAll(req, res) {
+    const { _id } = req.user;
+    const query = req.query;
+
+    try {
+      const response = await this.service.getAll({
+        ...query,
+        developerId: _id,
+      });
+
+      return res.status(response.statusCode).json(response);
+    } catch (e) {
+      return res
+        .status(e.statusCode || 500)
+        .json({ error: true, message: e.message || "Something went wrong" });
+    }
+  }
+
 }
 
 export default new ProjectController(projectService);
