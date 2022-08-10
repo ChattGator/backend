@@ -10,9 +10,9 @@ const router = express.Router();
 
 router.use("/test", test);
 router.use("/developer", developer);
-router.use("/project", isAuthorized, project);
 router.use("/user", user);
 router.use("/group", group);
+router.use("/project", isAuthorized, project);
 router.use("/", isAuthorized, () => console.log("helloworld v1 api"));
 
 export default router;

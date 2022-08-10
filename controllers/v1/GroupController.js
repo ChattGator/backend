@@ -28,6 +28,35 @@ class GroupController extends Controller {
         .json({ error: true, message: e.message || "Something went wrong" });
     }
   }
+
+  async addMember(req, res) {
+    const { id } = req.params;
+    console.log("HERE")
+
+    try {
+      const response = await this.service.addMember(id, req.body);
+
+      return res.status(response.statusCode).json(response);
+    } catch (e) {
+      return res
+        .status(e.statusCode || 500)
+        .json({ error: true, message: e.message || "Something went wrong" });
+    }
+  }
+
+  async removeMember(req, res) {
+    const { id } = req.params;
+
+    try {
+      const response = await this.service.removeMember(id, req.body);
+
+      return res.status(response.statusCode).json(response);
+    } catch (e) {
+      return res
+        .status(e.statusCode || 500)
+        .json({ error: true, message: e.message || "Something went wrong" });
+    }
+  }
 }
 
 export default new GroupController(groupService);

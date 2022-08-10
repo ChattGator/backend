@@ -40,6 +40,7 @@ class GroupService extends Service {
   }
 
   async get(id) {
+    
     try {
       const item = await this.model
         .findById(id)
@@ -51,6 +52,37 @@ class GroupService extends Service {
         error.statusCode = 404;
         throw error;
       }
+
+      return new HttpResponse(item);
+    } catch (errors) {
+      throw errors;
+    }
+  }
+
+  async addMember(id, data) {
+    const { memberId } = data;
+
+    try {
+      const item = await this.model.findByIdAndUpdate(
+        id,
+        { $push: { membersList: memberId } },
+        { new: true }
+      );
+
+      return new HttpResponse(item);
+    } catch (errors) {
+      throw errors;
+    }
+  }
+
+  async removeMember(id, data) {
+    const { memberId } = data;
+    try {
+      const item = await this.model.findByIdAndUpdate(
+        id,
+        { $pull: { membersList: memberId } },
+        { new: true }
+      );
 
       return new HttpResponse(item);
     } catch (errors) {
