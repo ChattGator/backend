@@ -16,7 +16,7 @@ class DeveloperService extends Service {
 
   async findByEmailOrCreateIfNotFound(data) {
     try {
-      let item = await this.model.findOne({ email: data.email });
+      let item = await this.model.findOne({ email: data.email }).populate('projects');
 
       if (!item) {
         item = await this.insert(data);
