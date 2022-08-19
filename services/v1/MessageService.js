@@ -7,3 +7,5 @@ class MessageService extends Service {
         super(model);
     }
 }
+
+export default MessageService;
