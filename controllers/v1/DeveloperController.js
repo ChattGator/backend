@@ -10,6 +10,18 @@ class DeveloperController extends Controller {
     super(service);
     autoBind(this);
   }
+
+  async login(req, res) {
+    try {
+      if (req.user) {
+        return res.status(200).json({ error: false, data: req.user });
+      }
+
+      return res.status(400).json({ error: true, data: null });
+    } catch (err) {
+      return res.status(400).json({ error: true, data: null });
+    }
+  }
 }
 
 export default new DeveloperController(developerService);
