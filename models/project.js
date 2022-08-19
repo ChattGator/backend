@@ -4,7 +4,6 @@ import { nanoid } from "nanoid";
 const schema = new mongoose.Schema({
   name: {
     type: String,
-    unique: true,
     required: true,
   },
   developerId: {
