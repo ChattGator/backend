@@ -30,7 +30,8 @@ class GroupService extends Service {
         .sort(sortBy)
         .skip(skip)
         .limit(limit)
-        .populate("membersList", "name");
+        .populate("membersList", "name")
+        .populate("admins", "name");
       const total = await this.model.countDocuments(query);
 
       return new HttpResponse(items, { totalCount: total });
@@ -44,7 +45,8 @@ class GroupService extends Service {
     try {
       const item = await this.model
         .findById(id)
-        .populate("membersList", "name");
+        .populate("membersList", "name")
+        .populate("admins", "name");;
 
       if (!item) {
         const error = new Error("Item not found");
