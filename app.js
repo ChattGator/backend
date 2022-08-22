@@ -57,7 +57,11 @@ io.on("connection", (socket) => {
 
     socket.on("userTyping", ({ groupId, user }) => {
         io.to(groupId).emit("usersReceiveTyping", { user, groupId });
-    })
+    });
+
+    socket.on("userStopTyping", ({ groupId, user }) => {
+        io.to(groupId).emit("hideTypingFromUsers", { user, groupId });
+    });
 });
 
 export default server;
