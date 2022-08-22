@@ -92,20 +92,18 @@ class GroupService extends Service {
     }
   }
 
-  async addMessage(id, data) {
-
-    const { messageId } = data;
-
+  async addMessage(id, messageId) {
+  
     try {
       const item = await this.model.findByIdAndUpdate(
         id,
         { $push: { messages: messageId } },
         { new: true }
       )
-
-      return new HttpResponse(item);
+        // console.log("Here",item)
+      return item;
     } catch (error) {
-      throw errors;
+      throw error;
     }
 
   }
