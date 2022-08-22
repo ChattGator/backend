@@ -11,15 +11,15 @@ const messageService = new MessageService(message);
 
 const app = express();
 app.use(
-  cors({
-    origin: "*",
-  })
+    cors({
+        origin: "*",
+    })
 );
 const server = http.createServer(app);
 const io = new Server(server, {
-  cors: {
-    origin: "*",
-  },
+    cors: {
+        origin: "*",
+    },
 });
 
 dotenv.config();
@@ -32,28 +32,32 @@ app.use("/api", apiRoutes);
 
 // socket
 io.on("connection", (socket) => {
-  socket.on("joinRoom", ({ user, groupId }) => {
-    socket.join(groupId);
+    socket.on("joinRoom", ({ user, groupId }) => {
+        socket.join(groupId);
 
-    socket.emit("message", {
-      user: { name: "Server" },
-      message: `Welcome ${user.name}`,
+        socket.emit("message", {
+            user: { name: "Server" },
+            message: `Welcome ${user.name}`,
+        });
     });
-  });
 
-  socket.on("chatMessage", ({ groupId, user, message }) => {
-    try {
-      messageService.insert({
-        userId: user.id,
-        groupId: groupId,
-        message,
-        messageType: "Text",
-      });
-    } catch (error) {
-      console.log(error);
-    }
-    io.to(groupId).emit("message", { user, message });
-  });
+    socket.on("chatMessage", ({ groupId, user, message }) => {
+        try {
+            messageService.insert({
+                userId: user.id,
+                groupId: groupId,
+                message,
+                messageType: "Text",
+            });
+        } catch (error) {
+            console.log(error);
+        }
+        io.to(groupId).emit("message", { user, message });
+    });
+
+    socket.on("userSendTyping", ({ user, groupId }) => {
+        io.to(groupId).emit(`usersReceiveTyping`, { user, groupId });
+    })
 });
 
 export default server;
