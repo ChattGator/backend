@@ -44,7 +44,7 @@ io.on("connection", (socket) => {
   socket.on("chatMessage", ({ groupId, user, message }) => {
     try {
       messageService.insert({
-        userId: user.id,
+        userId: user._id,
         groupId: groupId,
         message,
         messageType: "Text",
