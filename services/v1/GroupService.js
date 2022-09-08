@@ -44,7 +44,7 @@ class GroupService extends Service {
 
     try {
       const item = await this.model
-        .findById(id)
+        .findOne({ _id: id, isDeleted: false })
         .populate("membersList", "name")
         .populate("admins", "name");;
 
@@ -93,20 +93,32 @@ class GroupService extends Service {
   }
 
   async addMessage(id, messageId) {
-  
+
     try {
       const item = await this.model.findByIdAndUpdate(
         id,
         { $push: { messages: messageId } },
         { new: true }
       )
-        // console.log("Here",item)
+      // console.log("Here",item)
       return item;
-    } catch (error) {
-      throw error;
+    } catch (errors) {
+      throw errors;
     }
 
   }
+
+  async deleteGroups(id) {
+
+    try {
+      const item = await this.model.updateMany({ projectId: id }, { isDeleted: true });
+      return item;
+    } catch (errors) {
+      throw errors;
+    }
+  }
+
+
 }
 
 export default GroupService;

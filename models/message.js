@@ -11,6 +11,11 @@ const schema = new mongoose.Schema({
     ref: "Group",
     required: true,
   },
+  projectId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Project",
+    required: true
+  },
   messageType: {
     type: String,
     enum: ["Text", "Image", "Video", "File"],
@@ -20,6 +25,10 @@ const schema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  isDeleted: {
+    type: Boolean,
+    default: false
+  }
 });
 
 const message = mongoose.model("Message", schema);
