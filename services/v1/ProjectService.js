@@ -1,8 +1,18 @@
 import HttpResponse from "../../helpers/HttpResponse";
 import Service from "./Service";
 import Developer from "../../models/developer";
+import Message from "../../models/message";
+import Group from "../../models/group";
+import User from "../../models/user";
 import DeveloperService from "./DeveloperService";
+import MessageService from "./MessageService";
+import GroupService from "./GroupService";
+import UserService from "./UserService";
+
 const developerService = new DeveloperService(Developer);
+const messageService = new MessageService(Message);
+const groupService = new GroupService(Group);
+const userService = new UserService(User);
 
 class ProjectService extends Service {
   constructor(model) {
@@ -24,8 +34,12 @@ class ProjectService extends Service {
 
   async delete(developerId, id) {
     try {
-      const item = await this.model.findByIdAndDelete(id);
-      await developerService.removeProject(developerId, id);
+      const item = await this.model.findByIdAndUpdate(id, { isDeleted: true });
+      // await developerService.removeProject(developerId, id);
+      await groupService.deleteGroups(id);
+      await userService.deleteUsers(id);
+      await messageService.deleteMessages(id);
+
       if (!item) {
         const error = new Error("Item not found");
 

@@ -23,6 +23,10 @@ const schema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  isDeleted: {
+    type: Boolean,
+    default: false
+  }
 });
 
 const user = mongoose.model("User", schema);

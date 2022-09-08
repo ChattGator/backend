@@ -24,6 +24,16 @@ class MessageService extends Service {
         }
 
     }
+
+    async deleteMessages(id) {
+
+        try {
+            const item = await this.model.updateMany({ projectId: id }, { isDeleted: true });
+            return item;
+        } catch (errors) {
+            throw errors;
+        }
+    }
 }
 
 export default MessageService;

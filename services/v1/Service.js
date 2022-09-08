@@ -18,6 +18,9 @@ class Service {
     delete query.skip;
     delete query.limit;
     delete query.sortBy;
+    query['isDeleted'] = false;
+
+    console.log("query", query);
 
     if (query._id) {
       try {
@@ -26,7 +29,6 @@ class Service {
         throw new Error("Not able to generate mongoose id with content");
       }
     }
-
     try {
       const items = await this.model
         .find(query)
@@ -43,7 +45,7 @@ class Service {
 
   async get(id) {
     try {
-      const item = await this.model.findById(id);
+      const item = await this.model.findOne({ _id: id, isDeleted: false });
 
       if (!item) {
         const error = new Error("Item not found");
@@ -83,7 +85,7 @@ class Service {
 
   async delete(id) {
     try {
-      const item = await this.model.findByIdAndDelete(id);
+      const item = await this.model.findByIdAndUpdate(id, { isDeleted: true }, { new: true })
 
       if (!item) {
         const error = new Error("Item not found");
